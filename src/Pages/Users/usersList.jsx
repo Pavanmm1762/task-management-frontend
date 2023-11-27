@@ -67,7 +67,7 @@ const UserList = () => {
                                     </li > */}
                                 </ul >
                                 <div className="py-1" >
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" > Delete User</a >
+                                    {/* <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" > Delete User</a > */}
                                 </div >
                             </div >
                         </>) : null}
@@ -130,7 +130,7 @@ const UserList = () => {
                                     </div >
                                 </td >
                                 <td className="px-6 py-4" >
-                                    <a href="#" type="button" onClick={() => setShowModal(true)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" > Edit user</a >
+                                    <input type="button" onClick={() => setShowModal(true)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline" > Edit user</input >
                                 </td >
                             </tr >
                         )))

@@ -34,7 +34,7 @@ const Navbar = () => {
         } else {
             setActiveMenu(true);
         }
-    }, [screenSize]);
+    }, [setActiveMenu, screenSize]);
 
     useEffect(() => {
         const handleScroll = () => {
