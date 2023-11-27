@@ -1,10 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
-    const navigate = useNavigate();
     useEffect(() => {
         fetchProjects();
     }, []);

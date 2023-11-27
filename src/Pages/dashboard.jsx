@@ -1,12 +1,9 @@
 // Home.js
 import React, { useState, useEffect } from 'react';
 import {
-  FaTh,
-  FaBars,
   FaUserFriends,
   FaTasks,
   FaLayerGroup,
-  FaThList
 } from "react-icons/fa";
 
 

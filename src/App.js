@@ -22,12 +22,12 @@ const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
 
   useEffect(() => {
-    const currentThemeColor = localStorage.getItem('colorMode');
-    const currentThemeMode = localStorage.getItem('themeMode');
-    if (currentThemeColor && currentThemeMode) {
-      setCurrentColor(currentThemeColor);
-      setCurrentMode(currentThemeMode);
-    }
+    // const currentThemeColor = localStorage.getItem('colorMode');
+    // const currentThemeMode = localStorage.getItem('themeMode');
+    // if (currentThemeColor && currentThemeMode) {
+    //   setCurrentColor(currentThemeColor);
+    //   setCurrentMode(currentThemeMode);
+    // }
 
     // Check if the user is logged in
     const storedLoginStatus = localStorage.getItem('isLoggedIn');

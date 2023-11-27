@@ -9,10 +9,6 @@ const ReportDetails = () => {
         fetchReportDetails();
     }, []);
 
-    const handlePrint = () => {
-        window.print();
-    };
-
     const fetchReportDetails = async () => {
         try {
             const token = localStorage.getItem('token');

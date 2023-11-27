@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
     FaTh,
-    FaBars,
     FaUserAlt,
     FaSignOutAlt,
     FaTasks,
