@@ -1,15 +1,11 @@
 // UserList.js
 
 import React, { useEffect, useState } from 'react';
-
-
+import avatar from '../../components/data/img_avatar2.png';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
     const [showModal, setShowModal] = useState(false);;
-
-
-
 
     useEffect(() => {
         fetchUsers();
@@ -109,7 +105,7 @@ const UserList = () => {
                 <tbody>
                     {!users || users.length === 0 ? (
                         <tr>
-                            <td colSpan="5" classNameName='no-users-list'>No users to display</td>
+                            <td colSpan="5" className='text-center'>---No users to display---</td>
                         </tr>
                     ) :
                         (users.map((user, index) => (
@@ -118,9 +114,9 @@ const UserList = () => {
                                     {index + 1}
                                 </td>
                                 <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white" >
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Avatar" />
+                                    <img className="w-10 h-10 rounded-full" src={avatar} alt="Avatar" />
                                     <div className="ps-3" >
-                                        <div className="text-base font-bold" > {user.firstname} {user.lastname}</div >
+                                        <div className="text-base capitalize font-bold" > {user.firstname} {user.lastname}</div >
                                         <div className="font-normal text-gray-500" > {user.email}</div >
                                     </div >
                                 </th >
@@ -143,7 +139,7 @@ const UserList = () => {
             <div >
                 {showModal ? (
                     <>
-                        <div className="flex justify-center  items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-1010 outline-none focus:outline-none">
+                        <div className="flex justify-center  items-center overflow-x-hidden overflow-y-auto fixed inset-0  outline-none focus:outline-none" style={{ zIndex: '1100' }}>
                             <div className="relative w-full my-6 mx-auto max-w-3xl">
                                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                     <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
