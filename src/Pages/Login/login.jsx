@@ -87,7 +87,7 @@ const LoginForm = ({ onLogin }) => {
               />
               <span>Remember Me</span>
             </label>
-            <a className="text-blue-600 hover:text-blue-700 hover:underline hover:underline-offset-4" href="#">Forgot Password?</a>
+            Forgot Password?
           </div>
           <div className="text-center md:text-left">
             <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit">Login</button>

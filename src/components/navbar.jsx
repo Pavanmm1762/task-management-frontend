@@ -25,7 +25,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-    const { currentColor, activeMenu, setActiveMenu, handleClick, setScreenSize, screenSize } = useStateContext();
+    const { currentColor, activeMenu, setActiveMenu, handleClick, screenSize } = useStateContext();
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
