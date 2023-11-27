@@ -29,11 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-<<<<<<< HEAD
     "eject": "react-scripts eject"
-=======
-    "eject": "react-scripts eject" 
->>>>>>> 5c88e0574645ee48517137d23add84c94ca1ef04
   },
   "eslintConfig": {
     "extends": [
