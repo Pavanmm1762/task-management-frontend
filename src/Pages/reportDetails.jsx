@@ -12,8 +12,8 @@ const ReportDetails = () => {
     const fetchReportDetails = async () => {
         try {
             const token = localStorage.getItem('token');
-
-            const response = await fetch('http://localhost:8080/api/report-lists', {
+            const apiUrl = process.env.REACT_APP_API_URL;
+            const response = await fetch(`${apiUrl}/api/report-lists`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const ReportDetails = () => {
                 <tbody>
                     {!reportDetails || reportDetails.length === 0 ? (
                         <tr>
-                            <td colSpan="5" className="text-center">No Reports to display</td>
+                            <td colSpan="6" className="text-center">---No Reports to display---</td>
                         </tr>
                     ) :
                         (reportDetails.map((reportDetails, index) => (
@@ -102,7 +102,7 @@ const ReportDetails = () => {
                                     </div >
                                 </td >
                                 <td className="px-6 py-4" >
-                                    <div className="flex items-center bg:bg-blue-gray-50" >
+                                    <div className="flex items-center bg:bg-blue-gray-200" >
                                         <Progress value={reportDetails.progress} label={reportDetails.progress} color="cyan" />
 
                                     </div >

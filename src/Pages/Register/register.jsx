@@ -7,6 +7,7 @@ const RegisterForm = ({ setIsLoggedIn }) => {
 
   const [signupdata, setSignUpData] = useState({ username: "", email: "", password: "" });
   const [errorMessages, setErrorMessages] = useState({});
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const errors = {
     username: "Invalid username",
@@ -42,7 +43,7 @@ const RegisterForm = ({ setIsLoggedIn }) => {
 
     else {
       try {
-        const response = await axios.post("http://localhost:8080/auth/register", signupdata);
+        const response = await axios.post(`${apiUrl}/auth/register`, signupdata);
         console.log(response.data);
       } catch (error) {
         console.error("Error during register:", error.response.data);
@@ -66,7 +67,7 @@ const RegisterForm = ({ setIsLoggedIn }) => {
       </div>
       <div className="md:w-1/3 max-w-sm">
         <div className="text-center md:text-left">
-          <label className="mr-1 text-2xl">Sign Up</label>
+          <label className="mr-1 text-2xl dark:text-white">Sign Up</label>
         </div>
         <form onSubmit={handleLogin}>
           <input className="text-sm w-full mt-5 px-4 py-2 border border-solid border-gray-300 rounded" type="text" placeholder="Username"

@@ -1,6 +1,5 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { Progress } from "@material-tailwind/react";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,8 +11,8 @@ const TaskList = () => {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem('token');
-
-      const response = await fetch('http://localhost:8080/api/tasks', {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const response = await fetch(`${apiUrl}/api/tasks`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +78,7 @@ const TaskList = () => {
         <tbody>
           {!tasks || tasks.length === 0 ? (
             <tr>
-              <td colSpan="5" className="text-center">---No tasks to display---</td>
+              <td colSpan="6" className="text-center ">---No tasks to display---</td>
             </tr>
           ) :
             (tasks.map((tasks, index) => (
@@ -93,12 +92,12 @@ const TaskList = () => {
                     <div className="font-normal text-gray-500" >  </div >
                   </div >
                 </th >
-                <td className="px-6 py-4" >
+                <td className="px-6 py-4 font-bold" >
                   {tasks.task_name}
                 </td >
                 <td className="px-6 py-4" >
-                  <div className="flex items-center bg:bg-blue-gray-50" >
-                    <Progress value={tasks.progress} label={tasks.progress} color="cyan" />
+                  <div className="flex items-center" >
+                    <progress value={tasks.progress} max="100" /> {tasks.progress} %
 
                   </div >
                 </td >

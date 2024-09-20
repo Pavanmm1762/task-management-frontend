@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "../Styles/addUser.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const CreateUserForm = () => {
     const navigate = useNavigate();
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const [userData, setUserData] = useState({
         firstname: '',
         lastname: '',
@@ -31,7 +32,7 @@ const CreateUserForm = () => {
         try {
             setLoading(true)
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:8080/api/add-user', userData, {
+            const response = await axios.post(`${apiUrl}/api/add-user`, userData, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,58 +62,129 @@ const CreateUserForm = () => {
     };
 
     return (
-        <div className="user-form-container">
-            {successMessage && <div className="success-message">{successMessage}</div>}
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-            <h2>User Creation Form</h2>
-            <form className="user-form" onSubmit={handleSubmit}>
-                <div className="user-form-column">
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" value={userData.firstname} name="firstname"
-                        placeholder='First name'
-                        onChange={handleInputChange} required />
+        <div className="mx-auto max-w-3xl mt-5 bg-white shadow-md rounded p-8  dark:bg-secondary-dark-bg">
+            {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}
+            {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
+            <h2 className="text-2xl font-bold mb-4 dark:text-white">User Creation Form</h2>
+            <form className="user-form grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
+                <div className="col-span-1">
+                    <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">First Name</label>
+                    <input
+                        type="text"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        id="firstName"
+                        value={userData.firstname}
+                        name="firstname"
+                        placeholder="First name"
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
 
-                    <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName" value={userData.lastname} name="lastname"
-                        placeholder='Last name'
-                        onChange={handleInputChange} />
+                <div className="col-span-1">
+                    <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={userData.email}
+                        name="email"
+                        placeholder="Email"
+                        onChange={handleInputChange}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                    />
+                </div>
 
-                    <label htmlFor="role">Role</label>
-                    <select id="role" value={userData.role} name="role"
-                        onChange={handleInputChange} required>
+                <div className="col-span-1">
+                    <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Last Name</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        value={userData.lastname}
+                        name="lastname"
+                        placeholder="Last name"
+                        onChange={handleInputChange}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                </div>
+
+                <div className="col-span-1">
+                    <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={userData.password}
+                        name="password"
+                        placeholder="Password"
+                        onChange={handleInputChange}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                    />
+                </div>
+
+                <div className="col-span-1">
+                    <label htmlFor="role" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Role</label>
+                    <select
+                        id="role"
+                        value={userData.role}
+                        name="role"
+                        onChange={handleInputChange}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                    >
                         <option value="Admin">Admin</option>
                         <option value="User">User</option>
                     </select>
-                    <label htmlFor="avatar">
-                        Avatar URL:
-                        <input type="text" name="avatar" id="avatar" value={userData.avatar}
-                            placeholder='url'
-                            onChange={handleInputChange} />
-                    </label>
                 </div>
 
-                <div className="user-form-column">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" value={userData.email} name="email"
-                        placeholder='Email'
-                        onChange={handleInputChange} required />
-
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" value={userData.password} name="password"
-                        placeholder='Password'
-                        onChange={handleInputChange} required />
-
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" value={userData.confirmPassword} name="confirmPassword"
-                        placeholder='Confirm Password'
-                        onChange={handleInputChange} required />
-
+                <div className="col-span-1">
+                    <label htmlFor="confirmPassword" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        value={userData.confirmPassword}
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        onChange={handleInputChange}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                    />
                 </div>
-                <button type="submit" className='addUser' disabled={loading}>
-                    {loading ? 'Adding User...' : 'Add User'}
-                </button>
-            </form>
-        </div>
+
+                <div className="col-span-1">
+                    <label htmlFor="avatar" className="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Avatar URL</label>
+                    <input
+                        type="text"
+                        name="avatar"
+                        id="avatar"
+                        value={userData.avatar}
+                        placeholder="URL"
+                        onChange={handleInputChange}
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                </div>
+
+                <div className="col-span-2">
+                    <button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        disabled={loading}
+                    >
+                        {loading ? 'Adding User...' : 'Add User'}
+                    </button>
+                    <Link to="/task_management/users-list">
+                        <button
+                            type="submit"
+                            className="bg-red-500 ml-5 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            disabled={loading}
+                        >
+                            Cancel
+                        </button>
+                    </Link>
+                </div>
+            </form >
+        </div >
+
     );
 };
 

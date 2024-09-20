@@ -1,0 +1,7 @@
+.sidebar-collapsed {
+    transition: margin-left 0.3s;
+}
+
+.sidebar-expanded {
+    transition: margin-left 0.3s;
+}
