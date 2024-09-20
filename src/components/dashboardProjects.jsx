@@ -93,7 +93,7 @@ const DashboardProjects = () => {
                                 </td >
                                 <td className="px-6 py-4" >
                                     <div className="flex items-center text-blue-700 hover:underline" >
-                                        <Link to={`/ project / ${projects.id}`} >
+                                        <Link to={`/project/${projects.id}`} >
                                             View
                                         </Link>
                                     </div >
