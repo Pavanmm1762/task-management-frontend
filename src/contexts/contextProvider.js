@@ -14,10 +14,11 @@ export const ContextProvider = ({ children }) => {
     const [currentColor, setCurrentColor] = useState(localStorage.getItem('colorMode') || '#03C9D7');
     const [currentMode, setCurrentMode] = useState(localStorage.getItem('themeMode') || 'light');
     const [themeSettings, setThemeSettings] = useState(false);
-    const [activeMenu, setActiveMenu] = useState(true);
-    const [sidebarMode, setSidebarMode] = useState('expanded');
+    const [activeMenu, setActiveMenu] = useState(false);
+    const [sidebarMode, setSidebarMode] = useState('collapsed');
     const [sidebarName, setSidebarName] = useState('Dashboard')
     const [isClicked, setIsClicked] = useState(initialState);
+    const [role, setRole] = useState(localStorage.getItem('role') || 'member');
 
     useEffect(() => {
         const rootElement = document.documentElement;
@@ -56,6 +57,12 @@ export const ContextProvider = ({ children }) => {
 
     const handleClick = (clicked) => setIsClicked({ ...initialState, [clicked]: true });
 
+    // Set role in context and localStorage
+    const setUserRole = (newRole) => {
+        setRole(newRole);
+        localStorage.setItem('role', newRole);
+    };
+
     return (
         <StateContext.Provider
             value={{
@@ -64,6 +71,8 @@ export const ContextProvider = ({ children }) => {
                 activeMenu,
                 screenSize,
                 sidebarName,
+                role,
+                setRole: setUserRole,
                 sidebarMode,
                 setScreenSize,
                 setSidebarName,

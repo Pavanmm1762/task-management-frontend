@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import avatar from '../components/data/img_avatar2.png';
+import avatar from '../data/img_avatar2.png';
 import { BsChatLeft } from 'react-icons/bs';
 
 

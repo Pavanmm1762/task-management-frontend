@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import avatar from './data/img_avatar2.png';
+import avatar from '../data/img_avatar2.png';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import { useStateContext } from '../contexts/contextProvider';
 
 const DropdownUser = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
+    const { role } = useStateContext();
     const trigger = useRef(null);
     const dropdown = useRef(null);
 
@@ -47,8 +48,8 @@ const DropdownUser = () => {
                 />
                 <p className='hidden md:block'>
                     <span className="text-gray-400 text-14">Hi,</span>{' '}
-                    <span className="text-gray-400 font-bold ml-1 text-14">
-                        Admin
+                    <span className="text-gray-400 font-bold ml-1 text-14 capitalize">
+                        {role}
                     </span>
                 </p>
                 {dropdownOpen ? <MdKeyboardArrowUp className="text-gray-400 text-14" /> : <MdKeyboardArrowDown className="text-gray-400 text-14" />}

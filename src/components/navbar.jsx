@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useStateContext } from '../contexts/contextProvider';
-import Chat from '../components/dropDownMessages';
+import Chat from './dropDownMessages';
 import DropdownNotification from './dropDownNotification';
 import DropdownUser from './dropDownUser';
 
@@ -55,7 +55,7 @@ const Navbar = () => {
 
     //  const handleActiveMenu = () => setActiveMenu(!activeMenu);
     const toggleSidebar = () => {
-        if (screenSize <= 950) {
+        if (screenSize < 1024) {
             // On small screens, show/hide the sidebar completely
             setSidebarMode('expanded');
             setActiveMenu(prev => !prev);

@@ -1,13 +1,43 @@
 import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import { RiNotification3Line } from 'react-icons/ri';
-
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchNotifications,markNotificationAsRead } from '../services/apiService';
+import { useStateContext } from '../contexts/contextProvider';
+import { Loader } from 'lucide-react';
+import { formatDistanceToNowStrict, parseISO, addHours, addMinutes, } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const DropdownNotification = () => {
+    const { role } = useStateContext();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
     const trigger = useRef(null);
     const dropdown = useRef(null);
+
+    // Fetch notifications
+    const { data: notifications, isLoading, isError } = useQuery({
+        queryKey: ['notifications', role],
+        queryFn: () => fetchNotifications(1, 5, role),
+        refetchInterval: 30000,
+        refetchOnWindowFocus: true,
+    });
+
+    const { mutate: markAsRead } = useMutation({
+        mutationFn:markNotificationAsRead, 
+        onSuccess: () => {
+            queryClient.invalidateQueries(['notifications', role]); // Refresh notifications
+        },
+    });
+
+    const handleNotificationClick = (notification) => {
+        if (!notification.is_read) {
+            markAsRead(notification.id); // Update the `is_read` status in the backend
+        }
+        //navigate(`/notifications/${notification.id}`); // Navigate to the detailed page
+    };
 
     // close on click outside
     useEffect(() => {
@@ -57,7 +87,7 @@ const DropdownNotification = () => {
                 ref={dropdown}
                 onFocus={() => setDropdownOpen(true)}
                 onBlur={() => setDropdownOpen(false)}
-                className={`absolute -right-16 mt-2.5 flex h-72 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-cyan-700 dark:bg-secondary-dark-bg sm:right-0 sm:w-80 ${dropdownOpen === true ? 'block' : 'hidden'
+                className={`absolute -right-16 mt-2.5 flex max-h-72 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-cyan-700 dark:bg-secondary-dark-bg sm:right-0 sm:w-80 ${dropdownOpen === true ? 'block' : 'hidden'
                     }`}
             >
                 <div className="px-4 py-3">
@@ -65,69 +95,39 @@ const DropdownNotification = () => {
                 </div>
 
                 <ul className="flex h-auto flex-col overflow-y-auto">
-                    <li>
-                        <Link
-                            className="flex flex-col gap-2.5 border-t border-stroke px-4 py-3 hover:bg-gray-200 dark:border-cyan-700  dark:hover:bg-cyan-700"
-                            to="#"
+                    {isLoading ? (
+                        <li className="px-4 py-4 sm:px-6 text-center">
+                            <Loader className="h-6 w-6 text-blue-500 animate-spin inline-block" />
+                            <span className="ml-2 text-gray-500">Loading...</span>
+                        </li>
+                    ) : isError ? (
+                        <li className="px-4 py-4 sm:px-6 text-center text-red-500">
+                            Error loading updates
+                        </li>
+                    ) : (!notifications || notifications.length === 0) ? (
+                        <li className="px-4 py-4 sm:px-6 text-center text-gray-500">No notifications available.</li>
+                    ) : (notifications.map((notification) => (
+                        <li key={notification.id}>
+                          <button
+                            onClick={() => handleNotificationClick(notification)}
+                            className={`flex flex-col w-full text-left gap-2.5 border-t border-stroke px-4 py-3 hover:bg-gray-200 dark:border-cyan-700 dark:hover:bg-cyan-700 
+                                ${!notification.is_read ? 'bg-gray-100 dark:bg-gray-800 font-bold' : 'bg-white dark:bg-secondary-dark-bg'}`}
                         >
                             <p className="text-sm dark:text-gray-400">
-                                <span className="text-black dark:text-white">
-                                    Edit your information in a swipe
+                                <span className={`${!notification.is_read ? 'text-black dark:text-white' : 'text-bodydark2 dark:text-gray-400'}`}>
+                                    {notification.message}
                                 </span>{' '}
-                                Sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                deserunt mollit anim.
+                                ({notification.type})
                             </p>
-
-                            <p className="text-xs dark:text-gray-500">12 May, 2025</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className="flex flex-col gap-2.5 border-t border-stroke px-4 py-3 hover:bg-gray-200 dark:border-cyan-700  dark:hover:bg-cyan-700"
-                            to="#"
-                        >
-                            <p className="text-sm dark:text-gray-400">
-                                <span className="text-black dark:text-white">
-                                    It is a long established fact
-                                </span>{' '}
-                                that a reader will be distracted by the readable.
+                            <p className="text-xs dark:text-gray-500">
+                                {formatDistanceToNowStrict(
+                                    addMinutes(addHours(parseISO(notification.created_at), -5), -30)
+                                )} ago
                             </p>
-
-                            <p className="text-xs dark:text-gray-500">24 Feb, 2025</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className="flex flex-col gap-2.5 border-t border-stroke px-4 py-3 hover:bg-gray-2 dark:border-cyan-700  dark:hover:bg-cyan-700"
-                            to="#"
-                        >
-                            <p className="text-sm dark:text-gray-400">
-                                <span className="text-black dark:text-white">
-                                    There are many variations
-                                </span>{' '}
-                                of passages of Lorem Ipsum available, but the majority have
-                                suffered
-                            </p>
-
-                            <p className="text-xs dark:text-gray-500">04 Jan, 2025</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            className="flex flex-col gap-2.5 border-t border-stroke px-4 py-3 hover:bg-gray-2 dark:border-cyan-700  dark:hover:bg-cyan-700"
-                            to="#"
-                        >
-                            <p className="text-sm dark:text-gray-400">
-                                <span className="text-black dark:text-white">
-                                    There are many variations
-                                </span>{' '}
-                                of passages of Lorem Ipsum available, but the majority have
-                                suffered
-                            </p>
-
-                            <p className="text-xs dark:text-gray-500">01 Dec, 2024</p>
-                        </Link>
-                    </li>
+                        </button>
+                        </li>
+                    ))
+                    )}
                 </ul>
             </div>
         </div >

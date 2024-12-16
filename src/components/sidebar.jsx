@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useStateContext } from '../contexts/contextProvider';
 
 const Sidebar = () => {
-    const { currentColor, activeMenu, setActiveMenu, screenSize, sidebarMode, setSidebarName } = useStateContext();
+    const { currentColor, activeMenu, setActiveMenu, screenSize, sidebarMode, setSidebarName, role } = useStateContext();
     const [submenuOpen, setSubmenuOpen] = useState(null);
     const location = useLocation(); // Hook to get current location
 
@@ -21,14 +21,14 @@ const Sidebar = () => {
     const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2';
     const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
 
-    const menuItem = useMemo(() => [
+    const adminMenu = useMemo(() => [
         {
             path: "/task_management/dashboard",
             name: "Dashboard",
             icon: <FaTh />
         },
         {
-            path: "/task_management/project-lists",
+            path: "/task_management/projects",
             name: "Projects",
             icon: <FaLayerGroup />
         },
@@ -43,12 +43,32 @@ const Sidebar = () => {
             icon: <FaThList />
         },
         {
-            path: "/task_management/users-list",
+            path: "/task_management/users",
             name: "Users",
             icon: <FaUserAlt />
         }
     ], []);
 
+    const memberMenu = useMemo(() => [
+        {
+            path: "/task_management/dashboard",
+            name: "Dashboard",
+            icon: <FaTh />
+        },
+        {
+            path: "/task_management/projects",
+            name: "Projects",
+            icon: <FaLayerGroup />
+        },
+        {
+            path: "/task_management/tasks",
+            name: "Task",
+            icon: <FaTasks />
+        }
+    ], []);
+
+    // Determine which menu to use based on the user's role
+    const menuItem = role === 'admin' ? adminMenu : memberMenu;
 
     // Update sidebar name based on current location
     useEffect(() => {
@@ -65,7 +85,7 @@ const Sidebar = () => {
             ${screenSize >= 1024 && activeMenu
                 ? sidebarMode === 'collapsed'
                     ? 'w-16'
-                    : 'w-72'
+                    : 'w-64'
                 : screenSize < 1024 && activeMenu
                     ? 'w-64'
                     : 'hidden'

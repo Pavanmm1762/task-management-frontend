@@ -1,11 +1,17 @@
+const { select, menu } = require('@material-tailwind/react');
+
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}',
-        'node_modules/flowbite-react/lib/esm/**/*.js'],
-    darkMode: 'class',
+    content: [
+        './src/**/*.{js,jsx,ts,tsx}', // Existing content
+        'node_modules/flowbite-react/lib/esm/**/*.js', // Flowbite paths
+        'node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}', // Material Tailwind paths
+        'node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}' // Material Tailwind theme components
+    ],
+    darkMode: 'class', // Existing dark mode support
     theme: {
         fontFamily: {
-            display: ['Open Sans', 'sans-serif'],
-            body: ['Open Sans', 'sans-serif'],
+            display: ['Roboto', 'sans-serif'],
+            body: ['Roboto', 'sans-serif'],
         },
         extend: {
             fontSize: {
@@ -45,5 +51,8 @@ module.exports = {
             },
         },
     },
-    plugins: [require('flowbite/plugin')],
+    plugins: [
+        require('flowbite/plugin'), // Existing Flowbite plugin
+        require('@material-tailwind/react') // Material Tailwind plugin
+    ],
 };
