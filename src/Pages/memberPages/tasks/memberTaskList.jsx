@@ -9,16 +9,6 @@ import { useDebounce } from 'use-debounce';
 import { useInView } from 'react-intersection-observer';
 import { format, parse, isValid, formatDistanceToNow, isPast, isToday, isTomorrow } from 'date-fns';
 
-const useTasks = (offset, debouncedSearchTerm, pageSize) => {
-    return useQuery({
-        queryKey: ['memberTasks', '', offset, debouncedSearchTerm],
-        queryFn: () => fetchMemberTasks('', offset, debouncedSearchTerm, pageSize),
-        // staleTime: 300000, // 5 minutes
-        refetchOnWindowFocus: false,
-        retry: 2,
-    });
-}
-
 const columns = [
     { id: 'pending', title: 'To Do' },
     { id: 'in progress', title: 'In Progress' },
@@ -39,7 +29,14 @@ const TaskBoardContent = () => {
     const [offset, setOffset] = useState(0);
     const pageSize = 10;
     const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
-    const { data, isLoading, isError } = useTasks(offset, debouncedSearchTerm, pageSize);
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['memberTasks', '', offset, debouncedSearchTerm],
+        queryFn: () => fetchMemberTasks('', offset, debouncedSearchTerm, pageSize),
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+        retry: 2,
+    });
     const tasks = data?.tasks || [];
 
     const updateTaskMutation = useMutation({

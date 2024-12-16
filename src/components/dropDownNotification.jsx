@@ -120,7 +120,7 @@ const DropdownNotification = () => {
                             </p>
                             <p className="text-xs dark:text-gray-500">
                                 {formatDistanceToNowStrict(
-                                    addMinutes(addHours(parseISO(notification.created_at), -5), -30)
+                                    addMinutes(addHours(parseISO(notification.created_at), 0), 0)
                                 )} ago
                             </p>
                         </button>
