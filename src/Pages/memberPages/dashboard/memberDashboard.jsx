@@ -16,6 +16,7 @@ const MemberDashboard = () => {
         keepPreviousData: true,
     });
 
+    // eslint-disable-next-line no-unused-vars
     const { data: chartData, isLoading: loading, isError: error } = useQuery({
         queryKey: ['weeklyTaskData'],
         queryFn: fetchChartData,

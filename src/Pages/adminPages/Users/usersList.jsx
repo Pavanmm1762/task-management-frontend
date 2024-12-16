@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon, TrashIcon, EyeIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
     Card,
     CardHeader,

@@ -17,6 +17,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "caniuse-lite": "^1.0.30001689",
     "chart.js": "^4.4.5",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",

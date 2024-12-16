@@ -6,11 +6,10 @@ import {
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
 import Skeleton from 'react-loading-skeleton';
-import img from '../../../data/img_avatar2.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ArrowRightIcon, EllipsisVerticalIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon, EyeIcon } from "@heroicons/react/24/solid";
+import {  UserPlusIcon, EyeIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -23,7 +22,6 @@ import {
   Tabs,
   TabsHeader,
   Tab,
-  Avatar,
   IconButton,
   Tooltip,
   Menu,
@@ -100,7 +98,6 @@ const TasksList = () => {
     projectId: null,
   });
   const [formErrors, setFormErrors] = useState({});
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
 
   const pageSize = 5;
 
@@ -114,6 +111,7 @@ const TasksList = () => {
   });
 
   // Fetch members data
+  // eslint-disable-next-line no-unused-vars
   const { data: members, isLoading: isMemberLoading, isError: isMemberError } = useQuery({
     queryKey: ['members', taskData.projectId],
     queryFn: () => fetchAssociatedUsers(taskData.projectId),

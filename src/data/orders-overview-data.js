@@ -2,9 +2,7 @@ import {
   BellIcon,
   PlusCircleIcon,
   ShoppingCartIcon,
-  CreditCardIcon,
-  LockOpenIcon,
-  BanknotesIcon,
+  CreditCardIcon 
 } from "@heroicons/react/24/solid";
 
 export const ordersOverviewData = [

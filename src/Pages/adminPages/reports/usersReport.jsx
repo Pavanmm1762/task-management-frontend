@@ -7,18 +7,11 @@ import {
     CardBody,
     CardFooter,
     Typography,
-    Avatar,
-    Chip,
     Button,
-    IconButton,
-    Input,
-    Tooltip,
-    Progress,
+    Input, 
 } from "@material-tailwind/react";
 import { useDebounce } from 'use-debounce';
 import {
-    CalendarIcon, ClockIcon,
-    ArrowLongRightIcon,
     MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
 import { ArrowRightIcon, ArrowLeftIcon, ArrowTopRightOnSquareIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
@@ -71,6 +64,7 @@ const UsersReport = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
     const pageSize = 5;
+    // eslint-disable-next-line no-unused-vars
     const { currentMode, setCurrentMode } = useStateContext();
 
     const { data: usersReport, isLoading: isReportLoading, isError: isReportError } = useQuery({
@@ -84,6 +78,7 @@ const UsersReport = () => {
     });
     const users = usersReport?.users || [];
 
+    // eslint-disable-next-line no-unused-vars
     const { data: userReport, isLoading, isError } = useQuery({
         queryKey: ['userReport', selectedUser?.id],
         queryFn: () => fetchUserReport(selectedUser?.id),

@@ -1,30 +1,13 @@
 // Home.js
-import React, { useState, useEffect } from 'react';
-import {
-  FaUserFriends,
-  FaTasks,
-  FaLayerGroup,
-} from "react-icons/fa";
+import React from 'react';
 import {
   Typography,
   Card,
   CardHeader,
-  CardBody,
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Avatar,
-  Tooltip,
-  Progress,
+  CardBody 
 } from "@material-tailwind/react";
 import {
-  ListBulletIcon,
-  UsersIcon,
-  QueueListIcon,
-  ArrowUpIcon,
-  Square3Stack3DIcon,
+  ArrowUpIcon
 } from "@heroicons/react/24/solid";
 
 import DashboardProjects from '../../../components/adminDashboard/dashboardProjects';

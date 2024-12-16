@@ -1,10 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
-import { QueryClient, QueryClientProvider, useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@material-tailwind/react";
-import { Button } from "@material-tailwind/react";
-import { Input } from "@material-tailwind/react";
+import React, { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader2, Clock, Calendar } from 'lucide-react';
 import { toast } from "react-toastify";
 import { fetchMemberTasks, updateTaskStatus } from '../../../services/apiService';
@@ -37,7 +34,7 @@ const priorityColors = {
 
 const TaskBoardContent = () => {
     const queryClient = useQueryClient();
-    const [newTask, setNewTask] = React.useState('');
+    // eslint-disable-next-line no-unused-vars
     const [searchTerm, setSearchTerm] = useState('');
     const [offset, setOffset] = useState(0);
     const pageSize = 10;

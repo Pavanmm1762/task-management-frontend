@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -22,11 +22,11 @@ const loginSchema = z.object({
 });
 
 const MemberLoginForm = ({ onLogin }) => {
-    const [loginData, setLoginData] = useState({ username: "", password: "" });
-    const { role, setRole } = useStateContext();
+    // eslint-disable-next-line no-unused-vars
+    const { setRole } = useStateContext();
     const navigate = useNavigate();
 
-    const { register: login, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register: login, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
     });
 

@@ -29,7 +29,7 @@ const AddTeamMembersModal = ({ showModal, setShowModal, departments, projectId, 
             setSelectedMembers(alreadyAssigned);
         }
 
-    }, [showModal, allMembers]);
+    }, [showModal, allMembers, members]);
 
     useEffect(() => {
         if (allMembers) {

@@ -6,8 +6,6 @@ import {
     Tab,
     TabPanel,
 } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchReportData } from "../../../services/apiService";
 import OverallReport from "./overallReport";
 import ProjectReport from "./projectsReport";
 import UsersReport from "./usersReport";

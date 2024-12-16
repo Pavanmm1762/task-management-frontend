@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import { RiNotification3Line } from 'react-icons/ri';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -6,13 +5,13 @@ import { fetchNotifications,markNotificationAsRead } from '../services/apiServic
 import { useStateContext } from '../contexts/contextProvider';
 import { Loader } from 'lucide-react';
 import { formatDistanceToNowStrict, parseISO, addHours, addMinutes, } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const DropdownNotification = () => {
     const { role } = useStateContext();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const queryClient = useQueryClient();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const trigger = useRef(null);
     const dropdown = useRef(null);

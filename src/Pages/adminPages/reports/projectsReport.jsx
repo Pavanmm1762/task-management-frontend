@@ -7,13 +7,9 @@ import {
     CardBody,
     CardFooter,
     Typography,
-    Avatar,
-    Chip,
     Button,
-    IconButton,
     Input,
     Tooltip,
-    Progress,
 } from "@material-tailwind/react";
 import { useDebounce } from 'use-debounce';
 import {
@@ -72,6 +68,7 @@ const ProjectReport = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
     const pageSize = 5;
+    // eslint-disable-next-line no-unused-vars
     const { currentMode, setCurrentMode } = useStateContext();
 
     const { data: projectsReport, isLoading: isReportLoading, isError: isReportError } = useQuery({
@@ -85,6 +82,7 @@ const ProjectReport = () => {
     });
     const projects = projectsReport?.projects || [];
 
+    // eslint-disable-next-line no-unused-vars
     const { data: projectReport, isLoading, isError } = useQuery({
         queryKey: ['projectReport', selectedProject?.id],
         queryFn: () => fetchProjectReport(selectedProject?.id),
@@ -96,7 +94,7 @@ const ProjectReport = () => {
         retry: 2,
     });
     const projectDetails = projectReport?.project;
-    const tasks = projectReport?.tasks;
+    //const tasks = projectReport?.tasks;
     const users = projectReport?.users;
 
     const handleRowClick = (project) => {

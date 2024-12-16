@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, Search, User, CheckCircle, Clock, AlertCircle, BarChart2, MoreVertical, Edit, Trash2 } from 'lucide-react';
+import {CheckCircle, Clock, AlertCircle, BarChart2} from 'lucide-react';
 
 const SummaryItem = ({ icon, title, value, change }) => {
     return (

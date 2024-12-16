@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { CheckCircleIcon, MagnifyingGlassIcon, PencilIcon, EyeIcon, EllipsisVerticalIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, MagnifyingGlassIcon, EyeIcon, EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { renderPagination } from "../pagination";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';

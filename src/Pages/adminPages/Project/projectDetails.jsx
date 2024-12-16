@@ -5,29 +5,21 @@ import { Link, useParams } from 'react-router-dom';
 import * as z from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import Skeleton from 'react-loading-skeleton';
+// import Skeleton from 'react-loading-skeleton';
 import { CalendarIcon, ClockIcon, ArrowLongRightIcon } from "@heroicons/react/24/solid";
 import 'react-loading-skeleton/dist/skeleton.css';
 import { toast } from 'react-toastify';
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import {
-    Chip,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Button,
-    Input,
+    Chip, 
     IconButton,
     Typography,
     Tooltip,
 } from "@material-tailwind/react";
-
-import { useDebounce } from 'use-debounce';
 import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import {
-    fetchProject, addTask, updateProject, deleteProject, fetchAssociatedUsers, updateProjectMembers,
-    updateTask, deleteTask,
+    fetchProject, updateProject, deleteProject, fetchAssociatedUsers, updateProjectMembers
 } from '../../../services/apiService';
 import AddTeamMembersModal from '../../../components/AddTeamMembersModal';
 import { DeleteModal } from '../../../components/deleteModal';
@@ -77,6 +69,7 @@ const ProjectDetails = () => {
         status: 'not started',
     });
     const [showModal, setShowModal] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [selectedMembers, setselectedMembers] = useState([]);
     const departments = [
         { id: 'it', name: 'IT' },
@@ -94,6 +87,7 @@ const ProjectDetails = () => {
     const { projectId } = useParams();
 
     // Fetch Project data with caching and stale time settings
+    // eslint-disable-next-line no-unused-vars
     const { data: project, isLoading: isProjectLoading, isError: isProjectError } = useQuery({
         queryKey: ['project', projectId],
         queryFn: () => fetchProject(projectId),

@@ -68,7 +68,7 @@ const TaskDetails = () => {
         id: null,
         type: "Task",
     });
-    const [remainingPercentage, setRemainingPercentage] = useState(0);
+   // const [remainingPercentage, setRemainingPercentage] = useState(0);
     const [remainingTime, setRemainingTime] = useState({
         days: 0,
         hours: 0,
@@ -80,6 +80,7 @@ const TaskDetails = () => {
     const { projectId, taskId } = useParams();
 
     // Fetch Project data with caching and stale time settings
+    // eslint-disable-next-line no-unused-vars
     const { data: task, isLoading: isTaskLoading, isError: isTaskError } = useQuery({
         queryKey: ['taskDetails', taskId],
         queryFn: () => fetchTaskDetails(projectId, taskId),
@@ -90,6 +91,7 @@ const TaskDetails = () => {
     });
 
     // Fetch members data
+    // eslint-disable-next-line no-unused-vars
     const { data: members, isLoading: isMemberLoading, isError: isMemberError } = useQuery({
         queryKey: ['members', projectId],
         queryFn: () => fetchAssociatedUsers(projectId),
