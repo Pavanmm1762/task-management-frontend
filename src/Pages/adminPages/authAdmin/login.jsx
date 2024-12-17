@@ -23,7 +23,7 @@ const loginSchema = z.object({
 
 const LoginForm = ({ onLogin }) => {
   // eslint-disable-next-line no-unused-vars
-  const { setRole } = useStateContext();
+  const { setRole, setActiveMenu } = useStateContext();
   const navigate = useNavigate();
 
   const { register: login, handleSubmit, formState: { errors } } = useForm({
@@ -46,6 +46,7 @@ const LoginForm = ({ onLogin }) => {
         localStorage.setItem('role', 'admin');
         localStorage.setItem('userId', adminID);
         onLogin(token);
+        setActiveMenu(false);
         toast.success("Login successful!");
         navigate('/task_management/dashboard');
       }
